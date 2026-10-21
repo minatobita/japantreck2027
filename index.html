@@ -34,16 +34,16 @@
     </div>
 
     <script>
-        // 新しく取得した OpenAI API キーを貼り付けてください
-        const OPENAI_API_KEY = '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';
         const SYSTEM_INSTRUCTION = "あなたは Japan Trek 2027 の公式コンシェルジュAIアシスタントです。提供された参照資料（knowledge/ 内のファイル）を網羅的に確認し、正確かつ親切に回答してください。";
         
+        // ナレッジベースとして読み込むファイル群
         const KNOWLEDGE_FILES = [
             'knowledge/JapanTrek_QA_Pre-Info session.pdf'
         ];
 
         let combinedKnowledgeText = "";
 
+        // ページロード時に knowledge/ 配下のファイルを読み込んで合算
         window.addEventListener('DOMContentLoaded', async () => {
             if (window.pdfjsLib) {
                 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
@@ -52,10 +52,7 @@
             for (const filePath of KNOWLEDGE_FILES) {
                 try {
                     const res = await fetch(`./${filePath}`);
-                    if (!res.ok) {
-                        console.warn(`ファイルが見つかりません: ${filePath}`);
-                        continue;
-                    }
+                    if (!res.ok) continue;
 
                     if (filePath.toLowerCase().endsWith('.pdf')) {
                         const arrayBuffer = await res.arrayBuffer();
@@ -72,7 +69,7 @@
                         combinedKnowledgeText += `\n--- 【参照資料: ${filePath}】 ---\n` + text;
                     }
                 } catch (e) {
-                    console.warn(`ファイル読み込みエラー: ${filePath}`, e);
+                    console.warn(`ファイル読み込みスキップ: ${filePath}`, e);
                 }
             }
             console.log("すべての参照資料の読み込みが完了しました。");
@@ -96,14 +93,13 @@
             }
 
             try {
-                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                // Vercel サーバーレス API (/api/chat) 経由でリクエスト
+                const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${OPENAI_API_KEY}`
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        model: 'gpt-4o-mini',
                         messages: [
                             { role: 'system', content: SYSTEM_INSTRUCTION },
                             { role: 'user', content: fullPrompt }
@@ -114,7 +110,7 @@
                 const data = await response.json();
 
                 if (data.error) {
-                    loadingDiv.textContent = `エラー: ${data.error.message || 'APIリクエストに失敗しました'}`;
+                    loadingDiv.textContent = `エラー: ${typeof data.error === 'string' ? data.error : data.error.message}`;
                 } else {
                     const reply = data.choices?.[0]?.message?.content || '回答を取得できませんでした。';
                     loadingDiv.textContent = reply;
