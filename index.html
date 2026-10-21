@@ -1,0 +1,126 @@
+from functools import cached_property
+
+from google.adk.agents import LlmAgent
+from google.adk.models import Gemini
+from google.genai import Client
+import asyncio
+import json
+import re
+from typing import Any, Dict, List, Optional, Tuple
+
+from google.adk.agents.callback_context import CallbackContext
+from google.adk.models.llm_request import LlmRequest
+import google.auth
+from google.cloud import storage
+from google.genai import types
+
+
+
+class GlobalGemini(Gemini):
+  """Pins the Vertex AI client to the `global` location.
+
+  gemini-3 series models are only served from `global`; the default ADK
+  `Gemini` integration constructs a `google.genai.Client` whose location
+  defaults to the AgentEngine instance's region (e.g. `us-central1`) and
+  fails with model-not-found for these models. Subclassing per the override
+  pattern documented on `google.adk.models.google_llm.Gemini` lets the agent
+  keep running in its regional AgentEngine instance while routing the model
+  request to the global endpoint.
+  """
+
+  @cached_property
+  def api_client(self) -> Client:
+    return Client(vertexai=True, location="global")
+
+
+# --- BEGIN: knowledge resources scaffolding (auto-generated) ---
+# This block is emitted by the Lowcode Agent Designer code generator whenever the agent has
+# attached knowledge resources. It loads each resource from its source GCS URI on every
+# model call. Do not edit by hand: changes will be overwritten on the next download.
+
+_KNOWLEDGE_RESOURCES: List[Dict[str, str]] = [
+    {"fileName": 'JapanTrek_QA_Pre-Info session.pdf', "gcsUri": 'gs://190364062854_us-west1_agent_studio_files/adk_artifacts/agent_1792572160625/knowledge_resources/user:JapanTrek_QA_Pre-Info session.pdf/0', "mimeType": 'application/pdf'},
+]
+
+_KNOWLEDGE_GCS_URI_RE = re.compile(r"^gs://([^/]+)/(.+)$")
+
+
+def _parse_knowledge_gcs_uri(uri: str) -> Tuple[str, str]:
+  match = _KNOWLEDGE_GCS_URI_RE.match(uri)
+  if not match:
+    raise ValueError(f"Invalid GCS URI: {uri}")
+  return match.group(1), match.group(2)
+
+
+# Quota project is pinned to the agent's user project so GCS reads send
+# `x-goog-user-project=<project>` and do not fail `serviceusage.services.use`
+# against whatever project ADC happens to resolve.
+_KNOWLEDGE_CREDENTIALS, _ = google.auth.default(
+    quota_project_id="190364062854",
+)
+_KNOWLEDGE_STORAGE_CLIENT = storage.Client(
+    project="190364062854",
+    credentials=_KNOWLEDGE_CREDENTIALS,
+)
+
+
+def _download_knowledge_blob(gcs_uri: str) -> bytes:
+  bucket_name, blob_name = _parse_knowledge_gcs_uri(gcs_uri)
+  blob = _KNOWLEDGE_STORAGE_CLIENT.bucket(bucket_name).blob(blob_name)
+  return blob.download_as_bytes()
+
+
+async def load_artifact_before_model(
+    callback_context: CallbackContext,
+    llm_request: LlmRequest,
+) -> Optional[Any]:
+  """Inlines every configured knowledge resource on every model call."""
+  del callback_context  # unused; resources are static, not session-scoped.
+  if not _KNOWLEDGE_RESOURCES:
+    return None
+  artifact_names = [kr["fileName"] for kr in _KNOWLEDGE_RESOURCES]
+  llm_request.append_instructions([
+      f"""You have a list of artifacts:
+{json.dumps(artifact_names)}
+
+When the user asks questions about any of the artifacts, you should use the
+artifact data from request content directly.
+"""
+  ])
+  blobs = await asyncio.gather(
+      *(
+          asyncio.to_thread(_download_knowledge_blob, kr["gcsUri"])
+          for kr in _KNOWLEDGE_RESOURCES
+      )
+  )
+  for kr, data in zip(_KNOWLEDGE_RESOURCES, blobs):
+    mime_type = kr["mimeType"]
+    if mime_type == "application/json":
+      try:
+        part = types.Part.from_text(text=data.decode("utf-8"))
+      except UnicodeDecodeError:
+        part = types.Part.from_bytes(data=data, mime_type=mime_type)
+    else:
+      part = types.Part.from_bytes(data=data, mime_type=mime_type)
+    llm_request.contents.append(
+        types.Content(
+            role="user",
+            parts=[
+                types.Part.from_text(text=f"Artifact {kr['fileName']} is:"),
+                part,
+            ],
+        )
+    )
+  return None
+# --- END: knowledge resources scaffolding ---
+root_agent = LlmAgent(
+  name='JapanTreck2027',
+  model=GlobalGemini(model='gemini-3.5-flash'),
+  description=(
+      'Japan Trek 2027の公式参加者・関係者向けQ&Aエージェント。Google Cloud Storage (gs://japantreck2027) 内の公式ドキュメント（旅程表、参加費用規約、安全管理マニュアル、各種ガイドライン）を検索・参照し、正確な情報に基づいて質問に回答します。'
+  ),
+  sub_agents=[],
+  instruction='# 役割と目的\nあなたは Japan Trek 2027 の公式コンシェルジュAIアシスタントです。\nユーザーからの質問に対し、バケット (gs://japantreck2027) 内のドキュメントを検索し、信頼性の高い情報に基づいて明確かつ丁寧に回答してください。\n\n# 回答のルール\n1. 【根拠に基づく回答】\n   必ず連携されたデータソース (gs://japantreck2027) 内の情報のみに基づいて回答してください。ドキュメントに記載がない情報や不確実な内容については推測で答えず、「提供されている資料内には該当する記載が見つかりませんでした」と明確に伝えてください。\n\n2. 【正確性と引用】\n   旅程（日付・時間）、費用（金額・キャンセル規定）、服装規定（ドレスコード）などの数値や具体的ルールは、資料の記載通りの正確な情報を提示してください。\n\n3. 【トーン＆マナー】\n   丁寧で親しみやすく、かつプロフェッショナルなトーン（敬体：〜です・〜ます）で回答してください。\n\n4. 【不明点の問合せ先案内】\n   資料に記載がない内容や個別対応が必要な事項については、運営事務局へ直接問い合わせるよう促してください。',
+  tools=[],
+  before_model_callback=load_artifact_before_model,
+)
