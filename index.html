@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Japan Trek 2027 AI Concierge</title>
+    <!-- PDF解析用ライブラリ (pdf.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: #f4f6f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
@@ -26,17 +28,59 @@
             <div class="message agent-msg">こんにちは！Japan Trek 2027 公式AIコンシェルジュです。日程や費用についてご質問をどうぞ！</div>
         </div>
         <div class="chat-footer">
-            <input type="text" id="userInput" placeholder="質問を入力してください (例: 京都にはいつ移動しますか？)" onkeypress="handleKeyPress(event)">
+            <input type="text" id="userInput" placeholder="質問を入力してください..." onkeypress="handleKeyPress(event)">
             <button id="sendBtn" onclick="sendMessage()">送信</button>
         </div>
     </div>
 
     <script>
-        // 1. OpenAI APIキーとシステムプロンプトの設定 (キーをシングルクォーテーション '' で囲んでください)
         const OPENAI_API_KEY = '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';
-        const SYSTEM_INSTRUCTION = "あなたは Japan Trek 2027 の公式コンシェルジュAIアシスタントです。旅行日程（3月18〜19日LAX出発、3月20日京都到着）や参加規約などの質問に対して親切丁寧に回答してください。";
+        const SYSTEM_INSTRUCTION = "あなたは Japan Trek 2027 の公式コンシェルジュAIアシスタントです。提供された複数の参照資料（knowledge/ 内のファイル）を網羅的に確認し、正確かつ親切に回答してください。";
+        
+        // ★新しいファイルを追加した場合は、この配列にパスを書き足してください
+        const KNOWLEDGE_FILES = [
+            'JapanTrek_QA_Pre-Info session.pdf,
+            // 例: 'knowledge/hotel_info.pdf',
+        ];
 
-        // 2. メッセージ送信処理 (OpenAI Chat Completions API)
+        let combinedKnowledgeText = "";
+
+        // ページ読み込み時にリスト内の全ファイルを非同期で巡回・テキスト統合
+        window.addEventListener('DOMContentLoaded', async () => {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+            
+            for (const filePath of KNOWLEDGE_FILES) {
+                try {
+                    const res = await fetch(`./${filePath}`);
+                    if (!res.ok) {
+                        console.warn(`ファイルが見つかりません: ${filePath}`);
+                        continue;
+                    }
+
+                    if (filePath.toLowerCase().endsWith('.pdf')) {
+                        // PDFテキスト解析処理
+                        const arrayBuffer = await res.arrayBuffer();
+                        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                        let pdfText = "";
+                        for (let i = 1; i <= pdf.numPages; i++) {
+                            const page = await pdf.getPage(i);
+                            const content = await page.getTextContent();
+                            pdfText += content.items.map(item => item.str).join(" ") + "\n";
+                        }
+                        combinedKnowledgeText += `\n--- 【参照資料: ${filePath}】 ---\n` + pdfText;
+                    } else {
+                        // テキスト系ファイル (.txt, .md, .csv) 処理
+                        const text = await res.text();
+                        combinedKnowledgeText += `\n--- 【参照資料: ${filePath}】 ---\n` + text;
+                    }
+                } catch (e) {
+                    console.warn(`ファイル読み込みエラー: ${filePath}`, e);
+                }
+            }
+            console.log("すべての参照資料の読み込みが完了しました。");
+        });
+
+        // メッセージ送信処理
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const btn = document.getElementById('sendBtn');
@@ -49,6 +93,11 @@
 
             const loadingDiv = appendMessage('回答を生成中...', 'agent-msg');
 
+            let fullPrompt = text;
+            if (combinedKnowledgeText) {
+                fullPrompt = `【参照資料一覧】:\n${combinedKnowledgeText}\n\n【質問】:\n${text}`;
+            }
+
             try {
                 const response = await fetch('https://api.openai.com/v1/chat/completions', {
                     method: 'POST',
@@ -60,7 +109,7 @@
                         model: 'gpt-4o-mini',
                         messages: [
                             { role: 'system', content: SYSTEM_INSTRUCTION },
-                            { role: 'user', content: text }
+                            { role: 'user', content: fullPrompt }
                         ]
                     })
                 });
@@ -69,34 +118,19 @@
 
                 if (data.error) {
                     loadingDiv.textContent = `エラー: ${data.error.message || 'APIリクエストに失敗しました'}`;
-                    console.error('OpenAI API Error:', data.error);
                 } else {
                     const reply = data.choices?.[0]?.message?.content || '回答を取得できませんでした。';
                     loadingDiv.textContent = reply;
                 }
             } catch (err) {
-                loadingDiv.textContent = '通信エラーが発生しました。コンソール(F12)で詳細を確認してください。';
+                loadingDiv.textContent = '通信エラーが発生しました。';
                 console.error('Fetch Error:', err);
             } finally {
                 btn.disabled = false;
             }
         }
 
-        // 3. 画面上にメッセージを追加するヘルパー関数
         function appendMessage(text, className) {
             const chatBody = document.getElementById('chatBody');
             const msgDiv = document.createElement('div');
-            msgDiv.className = `message ${className}`;
-            msgDiv.textContent = text;
-            chatBody.appendChild(msgDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
-            return msgDiv;
-        }
-
-        // 4. Enterキー入力時の送信処理
-        function handleKeyPress(e) {
-            if (e.key === 'Enter') sendMessage();
-        }
-    </script>
-</body>
-</html>
+            msgDiv.className
