@@ -34,18 +34,16 @@
     </div>
 
     <script>
-        // 1. 提供された新しい OpenAI API キー
-        const OPENAI_API_KEY = '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';
+        // 新しく取得した OpenAI API キーを貼り付けてください
+        const OPENAI_API_KEY = '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';
         const SYSTEM_INSTRUCTION = "あなたは Japan Trek 2027 の公式コンシェルジュAIアシスタントです。提供された参照資料（knowledge/ 内のファイル）を網羅的に確認し、正確かつ親切に回答してください。";
         
-        // 2. 現在 knowledge フォルダに入っている参照ファイルリスト
         const KNOWLEDGE_FILES = [
             'knowledge/JapanTrek_QA_Pre-Info session.pdf'
         ];
 
         let combinedKnowledgeText = "";
 
-        // 画面ロード時に PDF ファイルを自動パースしてテキスト抽出
         window.addEventListener('DOMContentLoaded', async () => {
             if (window.pdfjsLib) {
                 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
@@ -80,7 +78,6 @@
             console.log("すべての参照資料の読み込みが完了しました。");
         });
 
-        // メッセージ送信処理
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const btn = document.getElementById('sendBtn');
