@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Japan Trek 2027 AI Concierge</title>
-    <!-- PDF解析用ライブラリ (pdf.js) -->
+    <!-- PDF解析用ライブラリ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
@@ -34,20 +34,22 @@
     </div>
 
     <script>
+        // 1. 提供された新しい OpenAI API キー
         const OPENAI_API_KEY = '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';
-        const SYSTEM_INSTRUCTION = "あなたは Japan Trek 2027 の公式コンシェルジュAIアシスタントです。提供された複数の参照資料（knowledge/ 内のファイル）を網羅的に確認し、正確かつ親切に回答してください。";
+        const SYSTEM_INSTRUCTION = "あなたは Japan Trek 2027 の公式コンシェルジュAIアシスタントです。提供された参照資料（knowledge/ 内のファイル）を網羅的に確認し、正確かつ親切に回答してください。";
         
-        // ★新しいファイルを追加した場合は、この配列にパスを書き足してください
+        // 2. 現在 knowledge フォルダに入っている参照ファイルリスト
         const KNOWLEDGE_FILES = [
-            'JapanTrek_QA_Pre-Info session.pdf,
-            // 例: 'knowledge/hotel_info.pdf',
+            'knowledge/JapanTrek_QA_Pre-Info session.pdf'
         ];
 
         let combinedKnowledgeText = "";
 
-        // ページ読み込み時にリスト内の全ファイルを非同期で巡回・テキスト統合
+        // 画面ロード時に PDF ファイルを自動パースしてテキスト抽出
         window.addEventListener('DOMContentLoaded', async () => {
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+            if (window.pdfjsLib) {
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+            }
             
             for (const filePath of KNOWLEDGE_FILES) {
                 try {
@@ -58,7 +60,6 @@
                     }
 
                     if (filePath.toLowerCase().endsWith('.pdf')) {
-                        // PDFテキスト解析処理
                         const arrayBuffer = await res.arrayBuffer();
                         const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
                         let pdfText = "";
@@ -69,7 +70,6 @@
                         }
                         combinedKnowledgeText += `\n--- 【参照資料: ${filePath}】 ---\n` + pdfText;
                     } else {
-                        // テキスト系ファイル (.txt, .md, .csv) 処理
                         const text = await res.text();
                         combinedKnowledgeText += `\n--- 【参照資料: ${filePath}】 ---\n` + text;
                     }
@@ -133,4 +133,16 @@
         function appendMessage(text, className) {
             const chatBody = document.getElementById('chatBody');
             const msgDiv = document.createElement('div');
-            msgDiv.className
+            msgDiv.className = `message ${className}`;
+            msgDiv.textContent = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            return msgDiv;
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+    </script>
+</body>
+</html>
