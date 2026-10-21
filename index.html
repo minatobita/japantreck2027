@@ -1,42 +1,99 @@
-async function sendMessage() {
-    const input = document.getElementById('userInput');
-    const btn = document.getElementById('sendBtn');
-    const text = input.value.trim();
-    if (!text) return;
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japan Trek 2027 AI Concierge</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #f4f6f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .chat-card { width: 100%; max-width: 650px; height: 85vh; background: #ffffff; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); display: flex; flex-direction: column; overflow: hidden; }
+        .chat-header { background: #1a73e8; color: white; padding: 16px 20px; text-align: center; font-weight: bold; font-size: 1.1rem; }
+        .chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        .message { max-width: 80%; padding: 12px 16px; border-radius: 12px; font-size: 0.95rem; line-height: 1.5; white-space: pre-wrap; }
+        .agent-msg { background: #f1f3f4; color: #202124; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .user-msg { background: #1a73e8; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .chat-footer { padding: 16px; border-top: 1px solid #e0e0e0; display: flex; gap: 10px; background: #fff; }
+        input[type="text"] { flex: 1; padding: 12px 16px; border: 1px solid #ccc; border-radius: 24px; outline: none; font-size: 0.95rem; }
+        button { background: #1a73e8; color: white; border: none; padding: 12px 24px; border-radius: 24px; cursor: pointer; font-weight: bold; }
+        button:disabled { background: #ccc; }
+    </style>
+</head>
+<body>
+    <div class="chat-card">
+        <div class="chat-header">🌸 Japan Trek 2027 AI コンシェルジュ</div>
+        <div class="chat-body" id="chatBody">
+            <div class="message agent-msg">こんにちは！Japan Trek 2027 公式AIコンシェルジュです。日程や費用についてご質問をどうぞ！</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="userInput" placeholder="質問を入力してください (例: 京都にはいつ移動しますか？)" onkeypress="handleKeyPress(event)">
+            <button id="sendBtn" onclick="sendMessage()">送信</button>
+        </div>
+    </div>
 
-    appendMessage(text, 'user-msg');
-    input.value = '';
-    btn.disabled = true;
+    <script>
+        // APIキーとシステムプロンプトの定義
+        const API_KEY = 'AQ.Ab8RN6KJaw2rmN6txEuHIh_bpnwl8CTWgPmWEPlpkOpKY6UTvQ';
+        const SYSTEM_INSTRUCTION = "あなたは Japan Trek 2027 の公式コンシェルジュAIアシスタントです。旅行日程（3月18〜19日LAX出発、3月20日京都到着）や参加規約などの質問に対して親切丁寧に回答してください。";
 
-    const loadingDiv = appendMessage('回答を生成中...', 'agent-msg');
+        // メッセージ送信と API 呼び出し処理
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const btn = document.getElementById('sendBtn');
+            const text = input.value.trim();
+            if (!text) return;
 
-    try {
-        // モデル名を gemini-1.5-flash に固定し、URLを整形
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-        
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [{
-                    parts: [{ text: `${SYSTEM_INSTRUCTION}\n\nユーザーからの質問: ${text}` }]
-                }]
-            })
-        });
+            appendMessage(text, 'user-msg');
+            input.value = '';
+            btn.disabled = true;
 
-        const data = await response.json();
+            const loadingDiv = appendMessage('回答を生成中...', 'agent-msg');
 
-        if (data.error) {
-            loadingDiv.textContent = `エラー: ${data.error.message || 'APIリクエストに失敗しました'}`;
-            console.error('API Error:', data.error);
-        } else {
-            const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || '回答を取得できませんでした。';
-            loadingDiv.textContent = reply;
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: `${SYSTEM_INSTRUCTION}\n\nユーザーからの質問: ${text}` }]
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    loadingDiv.textContent = `エラー: ${data.error.message || 'APIリクエストに失敗しました'}`;
+                    console.error('API Error:', data.error);
+                } else {
+                    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || '回答を取得できませんでした。';
+                    loadingDiv.textContent = reply;
+                }
+            } catch (err) {
+                loadingDiv.textContent = '通信エラーが発生しました。コンソール(F12)で詳細を確認してください。';
+                console.error('Fetch Error:', err);
+            } finally {
+                btn.disabled = false;
+            }
         }
-    } catch (err) {
-        loadingDiv.textContent = '通信エラーが発生しました。コンソール(F12)で詳細を確認してください。';
-        console.error('Fetch Error:', err);
-    } finally {
-        btn.disabled = false;
-    }
-}
+
+        // 画面上にメッセージを追加するヘルパー関数
+        function appendMessage(text, className) {
+            const chatBody = document.getElementById('chatBody');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${className}`;
+            msgDiv.textContent = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            return msgDiv;
+        }
+
+        // Enterキー入力時の送信処理
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+    </script>
+</body>
+</html>
