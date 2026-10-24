@@ -3,55 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Japan Trip 2027 AI Concierge</title>
+    <title>Japan Trek 2027 AI Concierge</title>
     <!-- PDF parsing library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <style>
         :root {
-            --primary-red: #B81D24; /* シックな和風の臙脂（えんじ）色 */
+            --primary-red: #B81D24;
             --dark-red: #8B0000;
-            --bg-color: #F9F6F0; /* 和紙のような上品な生成り色 */
+            --bg-color: #F9F6F0;
             --card-bg: #FFFFFF;
             --text-main: #2B2B2B;
-            --text-sub: #666666;
             --border-color: #E8E2D9;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: var(--bg-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; color: var(--text-main); }
-        
-        /* 漆器や和風モダンを意識したシックなカードデザイン */
         .chat-card { width: 100%; max-width: 680px; height: 85vh; background: var(--card-bg); border-radius: 16px; box-shadow: 0 12px 32px rgba(184, 29, 36, 0.08); display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border-color); }
-        
-        /* ヘッダー：深い赤地に金のラインとサクラアイコン */
-        .chat-header { background: var(--primary-red); color: #FFFFFF; padding: 20px 24px; text-align: center; font-size: 1.15rem; font-weight: 600; letter-spacing: 0.05em; border-bottom: 3px solid #D4AF37; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        
+        .chat-header { background: var(--primary-red); color: #FFFFFF; padding: 20px 24px; text-align: center; font-size: 1.15rem; font-weight: 600; border-bottom: 3px solid #D4AF37; }
         .chat-body { flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background-color: #FAFAFA; }
-        
         .message { max-width: 82%; padding: 14px 18px; border-radius: 12px; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; }
-        .agent-msg { background: #FFFFFF; color: var(--text-main); align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid var(--border-color); box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-        .user-msg { background: var(--primary-red); color: #FFFFFF; align-self: flex-end; border-bottom-right-radius: 2px; }
-        
+        .agent-msg { background: #FFFFFF; color: var(--text-main); align-self: flex-start; border: 1px solid var(--border-color); }
+        .user-msg { background: var(--primary-red); color: #FFFFFF; align-self: flex-end; }
         .chat-footer { padding: 18px 20px; border-top: 1px solid var(--border-color); display: flex; gap: 12px; background: #FFFFFF; }
-        input[type="text"] { flex: 1; padding: 14px 20px; border: 1px solid var(--border-color); border-radius: 28px; outline: none; font-size: 0.95rem; background: #FAF9F6; transition: border-color 0.2s; }
-        input[type="text"]:focus { border-color: var(--primary-red); background: #FFFFFF; }
-        
-        button { background: var(--primary-red); color: white; border: none; padding: 14px 28px; border-radius: 28px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: background 0.2s; }
-        button:hover { background: var(--dark-red); }
-        button:disabled { background: #E0E0E0; color: #999999; cursor: not-allowed; }
-
-        /* スクロールバーのデザインも洗練化 */
-        .chat-body::-webkit-scrollbar { width: 6px; }
-        .chat-body::-webkit-scrollbar-thumb { background: #E0DCD5; border-radius: 3px; }
+        input[type="text"] { flex: 1; padding: 14px 20px; border: 1px solid var(--border-color); border-radius: 28px; outline: none; font-size: 0.95rem; background: #FAF9F6; }
+        button { background: var(--primary-red); color: white; border: none; padding: 14px 28px; border-radius: 28px; cursor: pointer; font-weight: 600; }
+        button:disabled { background: #E0E0E0; color: #999999; }
     </style>
 </head>
 <body>
     <div class="chat-card">
-        <div class="chat-header">
-            <span>🌸 Japan Trip 2027 Concierge</span>
-        </div>
+        <div class="chat-header">🌸 Japan Trek 2027 Concierge</div>
         <div class="chat-body" id="chatBody">
-            <div class="message agent-msg">Welcome to the Japan Trip 2027 AI Concierge! Feel free to ask any questions about the schedule, logistics, or trip details.</div>
+            <div class="message agent-msg">Welcome to the Japan Trek 2027 AI Concierge! Feel free to ask any questions about the schedule, logistics, or trip details.</div>
         </div>
         <div class="chat-footer">
             <input type="text" id="userInput" placeholder="Ask a question..." onkeypress="handleKeyPress(event)">
@@ -60,60 +43,67 @@
     </div>
 
     <script>
-        // 1. アメリカ人参加者向けのシステムプロンプト設定
-        const SYSTEM_INSTRUCTION = `You are the official AI Concierge for "Japan Trip 2027", assisting American participants. 
+        const SYSTEM_INSTRUCTION = `You are the official AI Concierge for "Japan Trek 2027", assisting American participants. 
 
 [Primary Guidelines]
 1. Always communicate in clear, polite, and welcoming English.
 2. Answer based ONLY on the provided reference documents in the knowledge base.
-3. If a question cannot be answered using the provided materials, DO NOT guess or fabricate information. Politely decline and instruct the user to contact the Japan Trip organizers directly.
+3. If a question cannot be answered using the provided materials, DO NOT guess or fabricate information. Politely decline and instruct the user to contact the Japan Trek organizers directly.
 4. IMPORTANT MANDATE: At the very end of EVERY response, you MUST append the following disclaimers in English:
    - A friendly reminder that you are an AI assistant and may occasionally make mistakes or hallucinate details.
-   - An offer for them to reach out directly to the Japan Trip organizers if they need absolute confirmation or further assistance.`;
-
-        // 2. 参照ファイルのリスト
-        const KNOWLEDGE_FILES = [
-            'knowledge/JapanTrip_QA_Post-Info session.pdf',
-            'knowledge/JapanTrip_QA_Pre-Info session.pdf',
-            'knowledge/WeTravel_JapanTrip.pdf',
-            'knowledge/knowledge.txt'
-        ];
+   - An offer for them to reach out directly to the Japan Trek organizers if they need absolute confirmation or further assistance.`;
 
         let combinedKnowledgeText = "";
 
-        // ページロード時に knowledge/ 内のファイルを自動解析
+        // GitHub APIで knowledge フォルダ直下の全ファイルを自動読み込み
         window.addEventListener('DOMContentLoaded', async () => {
             if (window.pdfjsLib) {
                 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
             }
-            
-            for (const filePath of KNOWLEDGE_FILES) {
-                try {
-                    const res = await fetch(`./${filePath}`);
-                    if (!res.ok) continue;
 
-                    if (filePath.toLowerCase().endsWith('.pdf')) {
-                        const arrayBuffer = await res.arrayBuffer();
-                        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-                        let pdfText = "";
-                        for (let i = 1; i <= pdf.numPages; i++) {
-                            const page = await pdf.getPage(i);
-                            const content = await page.getTextContent();
-                            pdfText += content.items.map(item => item.str).join(" ") + "\n";
-                        }
-                        combinedKnowledgeText += `\n--- [Reference File: ${filePath}] ---\n` + pdfText;
-                    } else {
-                        const text = await res.text();
-                        combinedKnowledgeText += `\n--- [Reference File: ${filePath}] ---\n` + text;
-                    }
-                } catch (e) {
-                    console.warn(`File load skipped: ${filePath}`, e);
+            try {
+                const repoOwner = 'minatobita';
+                const repoName = 'japantreck2027';
+                const resList = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/knowledge`);
+                
+                if (!resList.ok) {
+                    console.error('Failed to fetch knowledge folder list');
+                    return;
                 }
+
+                const files = await resList.json();
+
+                for (const file of files) {
+                    if (file.type !== 'file' || file.name.startsWith('.')) continue;
+
+                    const downloadUrl = file.download_url;
+                    try {
+                        if (file.name.toLowerCase().endsWith('.pdf')) {
+                            const res = await fetch(downloadUrl);
+                            const arrayBuffer = await res.arrayBuffer();
+                            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                            let pdfText = "";
+                            for (let i = 1; i <= pdf.numPages; i++) {
+                                const page = await pdf.getPage(i);
+                                const content = await page.getTextContent();
+                                pdfText += content.items.map(item => item.str).join(" ") + "\n";
+                            }
+                            combinedKnowledgeText += `\n--- [Reference File: ${file.name}] ---\n` + pdfText;
+                        } else {
+                            const res = await fetch(downloadUrl);
+                            const text = await res.text();
+                            combinedKnowledgeText += `\n--- [Reference File: ${file.name}] ---\n` + text;
+                        }
+                    } catch (err) {
+                        console.warn(`File load skipped: ${file.name}`, err);
+                    }
+                }
+                console.log("All knowledge files loaded successfully via GitHub API.");
+            } catch (e) {
+                console.error("Knowledge load error:", e);
             }
-            console.log("Knowledge base successfully loaded.");
         });
 
-        // メッセージ送信処理
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const btn = document.getElementById('sendBtn');
@@ -134,9 +124,7 @@
             try {
                 const response = await fetch('/api/chat', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         messages: [
                             { role: 'system', content: SYSTEM_INSTRUCTION },
