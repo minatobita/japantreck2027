@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Japan Trek 2027 AI Concierge</title>
+    <title>Japan Trip 2027 AI Concierge</title>
     <!-- PDF parsing library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <style>
@@ -45,14 +45,14 @@
 </head>
 <body>
     <div class="chat-card">
-        <div class="chat-header">🌸 Japan Trek 2027 Concierge</div>
+        <div class="chat-header">🌸 Japan Trip 2027 Concierge</div>
         <div class="chat-body" id="chatBody">
-            <div class="message agent-msg">Welcome to the Japan Trek 2027 AI Concierge! Feel free to ask any questions about the schedule, logistics, or trip details.</div>
+            <div class="message agent-msg">Welcome to the Japan Trip 2027 AI Concierge! Feel free to ask any questions about the schedule, logistics, or trip details.</div>
         </div>
         
         <!-- 免責事項を画面下部に固定配置 -->
         <div class="disclaimer-bar">
-            💡 AI Concierge may occasionally make mistakes. For official confirmation or specific inquiries, please contact the Japan Trek organizers directly.
+            💡 AI Concierge may occasionally make mistakes. For official confirmation or specific inquiries, please contact the Japan Trip organizers directly.
         </div>
 
         <div class="chat-footer">
@@ -63,12 +63,12 @@
 
     <script>
         // AIのシステム指示（回答文に免責事項をつける指示を削除）
-        const SYSTEM_INSTRUCTION = `You are the official AI Concierge for "Japan Trek 2027", assisting participants.
+        const SYSTEM_INSTRUCTION = `You are the official AI Concierge for "Japan Trip 2027", assisting participants.
 
 [Primary Guidelines]
 1. Always communicate in clear, polite, and welcoming English (or match the user's language if asked in another language).
 2. Answer based ONLY on the provided reference documents in the knowledge base.
-3. If a question cannot be answered using the provided materials, DO NOT guess or fabricate information. Politely decline and instruct the user to contact the Japan Trek organizers directly.`;
+3. If a question cannot be answered using the provided materials, DO NOT guess or fabricate information. Politely decline and instruct the user to contact the Japan Trip organizers directly.`;
 
         let combinedKnowledgeText = "";
 
