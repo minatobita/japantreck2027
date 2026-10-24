@@ -1,1 +1,196 @@
-
+Japan Trip Pre-Info Session FAQ (RAG Knowledge Base)
+This document contains the FAQ items specifically collected prior to the Info Session for the Japan Trip. It is fully optimized with explicit context, synonyms, and search keywords for RAG systems.
+Q: How much will the Japan Trip cost?
+Keywords: Japan Trip cost, price, fee, total cost, participation fee, trip price, price estimate
+Answer: We are negotiating to keep the price under $2,000 USD per person. We'll confirm the exact amount by the Info Session.
+Q: How much should I budget for additional expenses during the Japan Trip?
+Keywords: budget, additional expenses, pocket money, personal expenses, meal costs, local transit, flight costs, Japan Trip budget
+Answer: As of Oct 11, 1-stop flights: $1,000~; Direct flights: $1,100~. Around $500 should cover basic meals and transportation between Kyoto and Osaka.
+Q: Can I join late or leave early during the Japan Trip?
+Keywords: join late, leave early, midway, partial participation, late arrival, early departure, schedule, Japan Trip
+Answer: Yes, that's fine. However, the participation fee is the same regardless of how long you join, so we recommend attending the full Japan Trip.
+Q: Can I skip the Japan Trip and join just a few events?
+Keywords: skip trip, attend partial events, individual events, selected events, partial participation, Japan Trip
+Answer: Unfortunately, no. To keep things fair for everyone, you'll need to pay the full Japan Trip fee even if you only attend some of the events.
+Q: Will we visit specific places in Kyoto, Hiroshima, or Tokyo during the Japan Trip?
+Keywords: itinerary, tourist spots, places to visit, sightseeing, travel plan, Kyoto, Hiroshima, Tokyo, Japan Trip itinerary
+Answer: We'll share the full itinerary at the Info Session. You'll also have opportunities to explore on your own during optional tours and free time in Kyoto and Tokyo.
+Q: Should I book my flight now for the Japan Trip?
+Keywords: book flight, flight booking, waitlist, application confirmation, flight timing, Japan Trip flights
+Answer: Your spot is only confirmed once applications open at the Info Session and you've paid the deposit. We recommend booking your flight after that. If you're comfortable with the risk of ending up on the waitlist, you're welcome to book earlier.
+Q: When do finals end, and when does the spring quarter start?
+Keywords: finals, final exams, spring quarter, academic calendar, FTMBA schedule, UCLA Anderson finals, Japan Trip timing
+Answer: Core final exams run through March 18, and spring quarter instruction begins on March 29.
+Q: Are there any recommended flights or arrival/departure times for the Japan Trip?
+Keywords: recommended flights, arrival time, departure time, LAX flights, flight schedule, arrival date, Japan Trip flights
+Answer: Since finals run through Thursday, March 18, we recommend leaving LAX on March 18 or 19 and arriving in Kyoto on Saturday, March 20. For the return trip, you can fly out of Japan on Saturday, March 27. Depending on your class schedule, you may be able to stay longer. Be careful with flights leaving LA on the afternoon of March 19, as the time difference could make your arrival too late.
+Q: What is the best way to get from Los Angeles (LA) to Kyoto for the Japan Trip?
+Keywords: LAX to Kyoto, travel route, KIX, Kansai Airport, Narita, Haneda, Itami, ITM, Shinkansen, ZIPAIR, transit, Japan Trip
+Answer: Kansai International Airport (KIX) is the closest major international airport to Kyoto. From KIX, you can take a train or bus to Kyoto. If you can't find a suitable flight to KIX, you can fly into Tokyo (Haneda/HND or Narita/NRT) and take a domestic flight to Osaka's Itami Airport (ITM), or travel to Shinagawa and take the Shinkansen (bullet train) to Kyoto. ZIPAIR, a low-cost airline owned by Japan Airlines, may be the cheapest option, but it only flies between LAX and Narita.
+Q: What time does the Japan Trip start on March 21?
+Keywords: March 21, Day 1 start time, arrival time, schedule, Japan Trip start
+Answer: There are no scheduled events that day. You'll just need to arrive in Japan and check into the hotel, and the rest of the day is yours.
+Q: Can I join the Japan Trip on the morning of March 22?
+Keywords: March 22 arrival, join morning, chartered bus, bus departure time, Japan Trip start
+Answer: Our chartered bus will leave the hotel at 9:30 AM, so we recommend checking in the day before.
+Q: What time does the Japan Trip end on March 27?
+Keywords: March 27, Day 8 end time, departure time, check-out, Japan Trip end
+Answer: There are no scheduled activities that day. You'll just check out of the hotel, so you can leave whenever works for you.
+Q: Can I bring my significant other on the Japan Trip? How many guests can I bring?
+Keywords: significant other, spouse, partner, bring guest, SO fee, how many guests, guest limit, Japan Trip guests
+Answer: You can bring one significant other. The participation fee will be the same as for Anderson students.
+Q: Can I bring a friend who is not affiliated with Anderson, or an alum on the Japan Trip?
+Keywords: non-Anderson friends, alumni, outside guests, alumni participation, guest eligibility, Japan Trip
+Answer: Unfortunately, no. The Japan Trip is not open to guests outside Anderson or to alumni.
+Q: Can students other than first-year full-time MBAs join the Japan Trip?
+Keywords: eligibility, 2nd year students, FEMBA, non-FTMBA, who can join, student eligibility, Japan Trip
+Answer: Yes! The Japan Trip is open to all current Anderson students, including second-years, FEMBAs, and students in other programs.
+Q: Can I request a single room or a shared room for the Japan Trip?
+Keywords: single room, double room, shared room, room request, room option, private room, Hiroshima room, Japan Trip lodging
+Answer: We're planning double rooms in Kyoto and Tokyo, and Japanese-style rooms shared by 4–5 people in Hiroshima. You can request a double or single room in Hiroshima, but availability is limited and there will be an additional charge.
+Q: Can I choose my roommate for the Japan Trip?
+Keywords: choose roommate, roommate preference, roommate assignment, partner rooming, Japan Trip rooming
+Answer: You'll share a room with your significant other if they're joining. For other room assignments, we'll ask for your preferences and do our best to match you with your preferred roommates. We'll finalize the details around February.
+Q: Can you accommodate vegetarian diets and food allergies during the Japan Trip?
+Keywords: vegetarian, vegan, food allergies, dietary needs, dietary restrictions, meal accommodation, dietary requirements, Japan Trip meals
+Answer: We expect to be able to accommodate dietary needs for meals included in the Japan Trip, with options such as no meat, no seafood, or vegetarian meals. You'll be able to list your dietary requirements in the application.
+Q: Will halal meals be available during the Japan Trip?
+Keywords: halal, halal meals, Muslim dietary needs, meat-free, Japan Trip food
+Answer: We can arrange options such as meals without meat, but we haven't confirmed whether the meals are halal-certified. Please contact the organizing team if you need halal meals.
+Japan Trip Complete FAQ (RAG Knowledge Base)
+This document contains the complete and verified set of all 38 Q&A items for the Japan Trip, fully optimized with explicit keywords and context for maximum retrieval accuracy in RAG systems.
+Q: Is it possible to join or leave midway through the Japan Trip?
+Keywords: join late, leave early, midway, partial participation, late arrival, early departure, schedule, Japan Trip
+Answer: Yes, joining late or leaving early is allowed for the Japan Trip. However, please note that the full participation fee still applies regardless of when you join or leave.
+Q: Can I skip the Japan Trip and join just a few events?
+Keywords: skip trip, attend partial events, individual events, selected events, partial participation, Japan Trip
+Answer: Unfortunately, no. To keep things fair for everyone, you will need to pay the full Japan Trip participation fee even if you only attend some of the scheduled events.
+Q: Are seats on the Shinkansen (Bullet Train) assigned? Can I choose my own seat during the Japan Trip?
+Keywords: Shinkansen, bullet train, seat assignment, choose seat, seat selection, train seats, Japan Trip transportation
+Answer: We have booked a block of seats for the Japan Trip group, so you cannot select a specific seat in advance. Please take any available seat within our reserved block when you board. Note that we may split the group across two separate Shinkansen trains.
+Q: Are there events such as Bar or Club outings planned during the Japan Trip?
+Keywords: bar, club, nightlife, night events, official parties, social events, outings, Japan Trip parties
+Answer: Official group parties are planned for Day 2 (March 21, Kyoto), Day 4 (March 23, Hiroshima), and Day 7 (March 26, Tokyo). In previous years, participants voluntarily gathered for additional bar or club outings during their free time.
+Q: Is participation in all events mandatory during the Japan Trip? Can I act separately?
+Keywords: mandatory events, act separately, skip events, separate plans, required attendance, Japan Trip schedule
+Answer: We generally encourage you to participate in all scheduled Japan Trip activities. If you choose to make separate plans, fees for any activities you skip will not be waived or refunded. You do so at your own risk.
+Q: How much free time will there be during the Japan Trip?
+Keywords: free time, personal time, schedule, free days, itinerary, Japan Trip free time
+Answer: Free time is scheduled on the following days during the Japan Trip:
+•
+Day 1: Arrival day / Kyoto
+•
+Day 3: Kyoto (Full day)
+•
+Day 6: Tokyo (Full day)
+•
+Day 7: Tokyo (Morning to evening)
+•
+Day 8: Tokyo / Departure day
+Q: What optional tours are available during the Japan Trip?
+Keywords: optional tours, side tours, Kyoto tour, Tokyo tour, activities, Japan Trip tours
+Answer: We are considering several optional tours in Kyoto (Day 3) and Tokyo (Days 6–7). Details will be announced once finalized.
+Q: When do final exams end, and when does the spring quarter start?
+Keywords: finals, final exams, spring quarter, academic calendar, FTMBA schedule, UCLA Anderson finals, Japan Trip timing
+Answer: For FTMBA students, core final exams run through March 18, and spring quarter instruction begins on March 29.
+Q: Are there any recommended flights or arrival/departure times for the Japan Trip?
+Keywords: recommended flights, arrival time, departure time, LAX flights, flight schedule, arrival date, Japan Trip flights
+Answer: Since FTMBA core finals run through Thursday, March 18, we recommend leaving LAX on March 18 or 19 and arriving in Kyoto on Saturday, March 20. For the return trip, you
+can fly out of Japan on Saturday, March 27. Depending on your class schedule, you may be able to stay longer. Be careful with flights leaving LAX on the afternoon of March 19, as the time difference could make your arrival in Japan too late.
+Q: What is the best way to get from Los Angeles (LAX) to Kyoto for the Japan Trip?
+Keywords: LAX to Kyoto, travel route, KIX, Kansai Airport, Narita, Haneda, Itami, ITM, Shinkansen, ZIPAIR, transit, Japan Trip
+Answer: Kansai International Airport (KIX) is the closest major international airport to Kyoto. From KIX, you can take a train or bus to Kyoto. If you cannot find a suitable flight to KIX, you can fly into Tokyo (Haneda/HND or Narita/NRT) and take a domestic flight to Osaka's Itami Airport (ITM), or travel to Shinagawa Station and take the Shinkansen (bullet train) to Kyoto. ZIPAIR, a low-cost airline owned by Japan Airlines that flies between LAX and NRT, may be the cheapest option.
+Q: Should I book my flight right now for the Japan Trip?
+Keywords: book flight, flight booking, waitlist, application confirmation, flight timing, Japan Trip flights
+Answer: Your spot on the Japan Trip is only confirmed once applications open at the Info Session and you have paid the deposit. We recommend booking your flight after that. If you are comfortable with the risk of ending up on the waitlist, you are welcome to book earlier.
+Q: What time does the Japan Trip start on March 21?
+Keywords: March 21, Day 1 start time, arrival time, schedule, Japan Trip start
+Answer: There are no scheduled official events on March 21. You will just need to arrive in Japan and check into the hotel, and the rest of the day is yours for free time.
+Q: Can I join the Japan Trip on the morning of March 22?
+Keywords: March 22 arrival, join morning, chartered bus, bus departure time, Japan Trip start
+Answer: Our chartered bus will leave the hotel at 9:30 AM on March 22, so we strongly recommend checking into the hotel the day before (March 21).
+Q: What time does the Japan Trip end on March 27?
+Keywords: March 27, Day 8 end time, departure time, check-out, Japan Trip end
+Answer: There are no scheduled activities on March 27. You will just check out of the hotel, so you can leave whenever works best for your schedule.
+Q: How much should I budget for additional expenses during the Japan Trip?
+Keywords: budget, additional expenses, pocket money, personal expenses, meal costs, local transit, Japan Trip budget
+Answer: Around $500 USD should cover basic personal meals and local transportation between Kyoto and Osaka during the Japan Trip.
+Q: What is the approximate flight cost for the Japan Trip?
+Keywords: flight cost, airfare price, flight price, ticket cost, LAX flights, Japan Trip flights
+Answer: As of October 11 estimates: Connecting flights start around $1,000+ USD, and direct non-stop flights start around $1,100+ USD.
+Q: What is not included in the Japan Trip participation fee?
+Keywords: what is not included, extra fees, airfare, insurance, meal expenses, fee coverage, Japan Trip fee
+Answer: Airfare, optional travel insurance, and personal meals are NOT included in the participation fee. The participation fee DOES include lodging, local transportation, sightseeing visits, and official party expenses for the Japan Trip.
+Q: Can students other than first-year full-time MBAs join the Japan Trip?
+Keywords: eligibility, 2nd year students, FEMBA, non-FTMBA, who can join, student eligibility, Japan Trip
+Answer: Yes! The Japan Trip is open to all UCLA Anderson students! We have a good number of 2nd years and students other than FTMBA join us every year.
+Q: Can I bring my significant other on the Japan Trip?
+Keywords: significant other, spouse, partner, bring guest, SO fee, Japan Trip guests
+Answer: Each MBA student may register one Significant Other (SO). The participation cost for an SO is the same as for MBA students.
+Q: How many significant others or guests can I bring on the Japan Trip?
+Keywords: multiple guests, extra guests, how many guests, additional guests, SO limit, Japan Trip guests
+Answer: If there are still spots available after the application deadline, we may be able to accommodate additional guests. Please contact the organizing team directly if you would like to bring more than one guest.
+Q: Can I bring a friend who is not affiliated with Anderson, or an alumnus/alumna on the Japan Trip?
+Keywords: non-Anderson friends, alumni, outside guests, alumni participation, guest eligibility, Japan Trip
+Answer: Unfortunately, no. The Japan Trip is not open to guests outside the Anderson community or to alumni.
+Q: Can I request a single room or a two-person room for the Japan Trip?
+Keywords: single room, two-person room, room request, room option, private room, Hiroshima room, Japan Trip lodging
+Answer: The base fee includes two-person rooms in Kyoto and Tokyo, and Japanese-style rooms shared by 4–5 people in Hiroshima. You can also request a two-person room in Hiroshima or a single room for an additional fee, subject to availability.
+Q: Can I add the single-room or Hiroshima two-person room option after the deadline?
+Keywords: late room request, room change after deadline, December 4 deadline, room upgrade, Japan Trip lodging
+Answer: After the December 4 deadline, we will need to check with the hotel before confirming your request. The price may also be higher than initial rates.
+Q: Can I choose my roommate for the Japan Trip?
+Keywords: choose roommate, roommate preference, roommate assignment, partner rooming, Japan Trip rooming
+Answer: You will share a room with your significant other if they are joining. For other room assignments, we will ask for your preferences and do our best to match you with your preferred roommates. Details will be finalized around February.
+Q: Should I start looking for a roommate for the Japan Trip?
+Keywords: looking for roommate, find roommate, roommate selection timing, Hiroshima roommate, Japan Trip rooming
+Answer: If you choose the optional two-person room in Hiroshima, please list your roommate on your application. For standard room arrangements (5-person rooms in Hiroshima and 2-person rooms elsewhere), we will ask for your roommate preferences around February. If you have specific people you would like to share with, feel free to start making plans now, but you do not need to notify the organizers yet.
+Q: Are smoking rooms available in the hotels during the Japan Trip?
+Keywords: smoking rooms, non-smoking, hotel smoking, smoking policy, Japan Trip hotels
+Answer: All rooms booked for the Japan Trip will be strictly non-smoking.
+Q: Is breakfast included with hotel stays during the Japan Trip?
+Keywords: breakfast, morning meals, food included, hotel breakfast, Japan Trip meals
+Answer: Breakfast is included ONLY on Day 5 in Hiroshima. On all other days, breakfast is not included.
+Q: Is there anything I should keep in mind when using the onsen (hot springs) during the Japan Trip?
+Keywords: onsen, hot springs, tattoos, tattoo policy, bath rules, Hiroshima onsen, Japan Trip onsen
+Answer: Guests with tattoos are officially not allowed to use public baths in Japan. In practice, though, we do not expect this to be an issue as long as you avoid disturbing other guests, such as by being noisy. If you are concerned, it is best to cover your tattoos with waterproof stickers or similar coverings. Note that we plan to reserve the hotel onsen in Hiroshima exclusively for our group, so tattoos will not be an issue there.
+Q: Can you accommodate vegan diets, vegetarian preferences, and food allergies during the Japan Trip?
+Keywords: vegan, vegetarian, food allergies, dietary needs, dietary restrictions, meal accommodation, dietary requirements, Japan Trip meals
+Answer: We expect to be able to accommodate dietary needs for meals included in the Japan Trip, with meat-free, seafood-free, vegetarian, and vegan options. You will be able to list your specific dietary requirements in the application.
+Q: Will halal meals be available during the Japan Trip?
+Keywords: halal, halal meals, Muslim dietary needs, meat-free, Japan Trip food
+Answer: We can arrange options such as meals without meat, but we have not confirmed whether the meals are certified Halal. Please contact the organizing team directly if you need Halal meals.
+Q: Do you have any restaurant recommendations for free time during the Japan Trip?
+Keywords: restaurant recommendations, local dining, food recommendations, free time dining, Japan Trip restaurants
+Answer: We plan to share recommendations for nearby restaurants where you can eat during your free time. We will send these recommendations out by the start of the Japan Trip.
+Q: What are the rules regarding drinking alcohol and smoking in Japan?
+Keywords: alcohol rules, drinking in public, smoking rules, designated smoking areas, public drinking laws, Japan rules
+Answer: Drinking alcohol in public places such as streets or parks is prohibited or discouraged. Please drink only in restaurants or designated venues. Smoking (including e-cigarettes) is prohibited both indoors and outdoors in Japan, except in designated "Smoking Areas."
+Q: What happens if the number of applicants exceeds capacity for the Japan Trip?
+Keywords: capacity limit, waitlist, max applicants, 80 people limit, spots filled, application limit, Japan Trip registration
+Answer: We generally accept participants on a first-come, first-served basis, up to 80 people. Once all spots are filled, additional applicants will be placed on a waitlist. We will do our best to secure additional rooms with the hotels in the meantime.
+Q: Is it possible to transfer or sell participation rights for the Japan Trip?
+Keywords: transfer tickets, sell tickets, ticket resale, registration transfer, February 12 deadline, Japan Trip ticket
+Answer: You can transfer or sell your participation ticket through the system until February 12. Please check the information sent after registration for full details.
+Q: Are there luggage restrictions or luggage delivery services available during the Japan Trip?
+Keywords: luggage restrictions, baggage limit, luggage delivery, Takkyubin, Kyoto to Tokyo, cannabis, illegal drugs, Japan Trip luggage
+Answer: There is no limit on the amount of luggage you can bring. We expect a luggage delivery service to be available to ship main luggage from Kyoto to Tokyo on Day 4. Please note that bringing illegal drugs, including cannabis in any form, into Japan is strictly prohibited.
+Q: Which credit card brands are accepted in Japan, and should I carry cash?
+Keywords: credit cards, Visa, Mastercard, cash, cash needed, payment methods, Japanese Yen, Japan Trip money
+Answer: We recommend bringing a Visa or Mastercard credit card. Note that some traditional restaurants and small shops may only accept cash.
+Q: What kind of clothing is appropriate for the Japan Trip weather?
+Keywords: clothing, what to wear, weather, temperature, Tokyo weather, Kyoto weather, Hiroshima weather, Japan Trip attire
+Answer: Average temperatures in March:
+•
+Tokyo: 41–57°F (Avg. 50°F) / 5–14°C
+•
+Kyoto: 40–57°F (Avg. 49°F) / 4–14°C
+•
+Hiroshima: 41–58°F (Avg. 49°F) / 5–14°C
+Suggested Clothing: Layered outfit such as a shirt + sweater + light coat, or sweatshirt + jacket.
+Q: Do I need a local SIM card or mobile data plan for the Japan Trip?
+Keywords: SIM card, eSIM, mobile data, internet access, Wi-Fi, phone plan, Japan Trip data
+Answer: Since there will be plenty of free time and self-guided exploration, we strongly recommend purchasing a traveler-friendly eSIM plan prior to or upon arrival in Japan.
+Q: How much cash should I bring for the Japan Trip?
+Keywords: cash, how much cash, Yen, 10000 yen, currency, pocket money, Japan Trip cash
+Answer: Most places in Japan accept credit cards, so having around ¥10,000 JPY (approximately $60 USD) in cash should be sufficient.
