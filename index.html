@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Japan Trip 2027 AI Concierge</title>
+    <title>Japan Trek 2027 AI Concierge</title>
     <!-- PDF parsing library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <style>
@@ -26,7 +26,6 @@
         .agent-msg { background: #FFFFFF; color: var(--text-main); align-self: flex-start; border: 1px solid var(--border-color); }
         .user-msg { background: var(--primary-red); color: #FFFFFF; align-self: flex-end; }
         
-        /* 免責事項の固定バー表示 */
         .disclaimer-bar {
             background-color: #F3EFEA;
             color: var(--text-sub);
@@ -40,19 +39,18 @@
         .chat-footer { padding: 14px 20px; border-top: 1px solid var(--border-color); display: flex; gap: 12px; background: #FFFFFF; }
         input[type="text"] { flex: 1; padding: 14px 20px; border: 1px solid var(--border-color); border-radius: 28px; outline: none; font-size: 0.95rem; background: #FAF9F6; }
         button { background: var(--primary-red); color: white; border: none; padding: 14px 28px; border-radius: 28px; cursor: pointer; font-weight: 600; }
-        button:disabled { background: #E0E0E0; color: #999999; }
+        button:disabled { background: #E0E0E0; color: #999999; cursor: not-allowed; }
     </style>
 </head>
 <body>
     <div class="chat-card">
-        <div class="chat-header">🌸 Japan Trip 2027 Concierge</div>
+        <div class="chat-header">🌸 Japan Trek 2027 Concierge</div>
         <div class="chat-body" id="chatBody">
-            <div class="message agent-msg">Welcome to the Japan Trip 2027 AI Concierge! Feel free to ask any questions about the schedule, logistics, or trip details.</div>
+            <div class="message agent-msg">Welcome to the Japan Trek 2027 AI Concierge! Feel free to ask any questions about the schedule, logistics, or trip details.</div>
         </div>
         
-        <!-- 免責事項を画面下部に固定配置 -->
         <div class="disclaimer-bar">
-            💡 AI Concierge may occasionally make mistakes. For official confirmation or specific inquiries, please contact the Japan Trip organizers directly.
+            💡 AI Concierge may occasionally make mistakes. For official confirmation or specific inquiries, please contact the Japan Trek organizers directly.
         </div>
 
         <div class="chat-footer">
@@ -62,17 +60,119 @@
     </div>
 
     <script>
-        // AIのシステム指示（回答文に免責事項をつける指示を削除）
-        const SYSTEM_INSTRUCTION = `You are the official AI Concierge for "Japan Trip 2027", assisting participants.
+        const SYSTEM_INSTRUCTION = `You are the official AI Concierge for "Japan Trek 2027", assisting participants.
 
 [Primary Guidelines]
 1. Always communicate in clear, polite, and welcoming English (or match the user's language if asked in another language).
 2. Answer based ONLY on the provided reference documents in the knowledge base.
-3. If a question cannot be answered using the provided materials, DO NOT guess or fabricate information. Politely decline and instruct the user to contact the Japan Trip organizers directly.`;
+3. If a question cannot be answered using the provided materials, DO NOT guess or fabricate information. Politely decline and instruct the user to contact the Japan Trek organizers directly.`;
 
         let combinedKnowledgeText = "";
 
         // GitHub APIで knowledge フォルダ直下の全ファイルを自動読み込み
         window.addEventListener('DOMContentLoaded', async () => {
             if (window.pdfjsLib) {
-                pdfjsLib.Global
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+            }
+
+            try {
+                const repoOwner = 'minatobita';
+                const repoName = 'japantreck2027';
+                const resList = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/knowledge`);
+                
+                if (!resList.ok) return;
+
+                const files = await resList.json();
+
+                for (const file of files) {
+                    if (file.type !== 'file' || file.name.startsWith('.')) continue;
+
+                    const downloadUrl = file.download_url;
+                    try {
+                        if (file.name.toLowerCase().endsWith('.pdf')) {
+                            const res = await fetch(downloadUrl);
+                            const arrayBuffer = await res.arrayBuffer();
+                            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                            let pdfText = "";
+                            for (let i = 1; i <= pdf.numPages; i++) {
+                                const page = await pdf.getPage(i);
+                                const content = await page.getTextContent();
+                                pdfText += content.items.map(item => item.str).join(" ") + "\n";
+                            }
+                            combinedKnowledgeText += `\n--- [Reference File: ${file.name}] ---\n` + pdfText;
+                        } else {
+                            const res = await fetch(downloadUrl);
+                            const text = await res.text();
+                            combinedKnowledgeText += `\n--- [Reference File: ${file.name}] ---\n` + text;
+                        }
+                    } catch (err) {
+                        console.warn(`File load skipped: ${file.name}`, err);
+                    }
+                }
+                console.log("All knowledge files loaded successfully via GitHub API.");
+            } catch (e) {
+                console.error("Knowledge load error:", e);
+            }
+        });
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const btn = document.getElementById('sendBtn');
+            const text = input.value.trim();
+            if (!text) return;
+
+            appendMessage(text, 'user-msg');
+            input.value = '';
+            btn.disabled = true;
+
+            const loadingDiv = appendMessage('Generating response...', 'agent-msg');
+
+            try {
+                let fullPrompt = text;
+                if (combinedKnowledgeText) {
+                    fullPrompt = `[Reference Documents]:\n${combinedKnowledgeText}\n\n[User Question]:\n${text}`;
+                }
+
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        messages: [
+                            { role: 'system', content: SYSTEM_INSTRUCTION },
+                            { role: 'user', content: fullPrompt }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    loadingDiv.textContent = `Error: ${typeof data.error === 'string' ? data.error : (data.error.message || 'API error')}`;
+                } else {
+                    const reply = data.choices?.[0]?.message?.content || 'Sorry, I could not generate a response.';
+                    loadingDiv.textContent = reply;
+                }
+            } catch (err) {
+                loadingDiv.textContent = 'A network error occurred. Please try again.';
+                console.error('Fetch Error:', err);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        function appendMessage(text, className) {
+            const chatBody = document.getElementById('chatBody');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${className}`;
+            msgDiv.textContent = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            return msgDiv;
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+    </script>
+</body>
+</html>
