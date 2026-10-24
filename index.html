@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Japan Trek 2027 AI Concierge</title>
+    <title>Japan Trip 2027 AI Concierge</title>
     <!-- PDF parsing library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <style>
@@ -48,10 +48,10 @@
 <body>
     <div class="chat-card">
         <div class="chat-header">
-            <span>🌸 Japan Trek 2027 Concierge</span>
+            <span>🌸 Japan Trip 2027 Concierge</span>
         </div>
         <div class="chat-body" id="chatBody">
-            <div class="message agent-msg">Welcome to the Japan Trek 2027 AI Concierge! Feel free to ask any questions about the schedule, logistics, or trip details.</div>
+            <div class="message agent-msg">Welcome to the Japan Trip 2027 AI Concierge! Feel free to ask any questions about the schedule, logistics, or trip details.</div>
         </div>
         <div class="chat-footer">
             <input type="text" id="userInput" placeholder="Ask a question..." onkeypress="handleKeyPress(event)">
@@ -61,20 +61,20 @@
 
     <script>
         // 1. アメリカ人参加者向けのシステムプロンプト設定
-        const SYSTEM_INSTRUCTION = `You are the official AI Concierge for "Japan Trek 2027", assisting American participants. 
+        const SYSTEM_INSTRUCTION = `You are the official AI Concierge for "Japan Trip 2027", assisting American participants. 
 
 [Primary Guidelines]
 1. Always communicate in clear, polite, and welcoming English.
 2. Answer based ONLY on the provided reference documents in the knowledge base.
-3. If a question cannot be answered using the provided materials, DO NOT guess or fabricate information. Politely decline and instruct the user to contact the Japan Trek organizers directly.
+3. If a question cannot be answered using the provided materials, DO NOT guess or fabricate information. Politely decline and instruct the user to contact the Japan Trip organizers directly.
 4. IMPORTANT MANDATE: At the very end of EVERY response, you MUST append the following disclaimers in English:
    - A friendly reminder that you are an AI assistant and may occasionally make mistakes or hallucinate details.
-   - An offer for them to reach out directly to the Japan Trek organizers if they need absolute confirmation or further assistance.`;
+   - An offer for them to reach out directly to the Japan Trip organizers if they need absolute confirmation or further assistance.`;
 
         // 2. 参照ファイルのリスト
         const KNOWLEDGE_FILES = [
-            'knowledge/JapanTrek_QA_Post-Info session.pdf',
-            'knowledge/JapanTrek_QA_Pre-Info session.pdf',
+            'knowledge/JapanTrip_QA_Post-Info session.pdf',
+            'knowledge/JapanTrip_QA_Pre-Info session.pdf',
             'knowledge/WeTravel_JapanTrip.pdf'
         ];
 
