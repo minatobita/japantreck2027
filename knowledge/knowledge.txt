@@ -1,23 +1,10 @@
-Japan Trip Pre-Info Session FAQ (RAG Knowledge Base)
-This document contains the FAQ items specifically collected prior to the Info Session for the Japan Trip. It is fully optimized with explicit context, synonyms, and search keywords for RAG systems.
-Q: How much will the Japan Trip cost?
-Keywords: Japan Trip cost, price, fee, total cost, participation fee, trip price, price estimate
-Answer: We are negotiating to keep the price under $2,000 USD per person. We'll confirm the exact amount by the Info Session.
+This document contains the FAQ items for the Japan Trip. It is fully optimized with explicit context, synonyms, and search keywords for RAG systems.
 Q: How much should I budget for additional expenses during the Japan Trip?
 Keywords: budget, additional expenses, pocket money, personal expenses, meal costs, local transit, flight costs, Japan Trip budget
 Answer: As of Oct 11, 1-stop flights: $1,000~; Direct flights: $1,100~. Around $500 should cover basic meals and transportation between Kyoto and Osaka.
 Q: Can I join late or leave early during the Japan Trip?
 Keywords: join late, leave early, midway, partial participation, late arrival, early departure, schedule, Japan Trip
 Answer: Yes, that's fine. However, the participation fee is the same regardless of how long you join, so we recommend attending the full Japan Trip.
-Q: Can I skip the Japan Trip and join just a few events?
-Keywords: skip trip, attend partial events, individual events, selected events, partial participation, Japan Trip
-Answer: Unfortunately, no. To keep things fair for everyone, you'll need to pay the full Japan Trip fee even if you only attend some of the events.
-Q: Will we visit specific places in Kyoto, Hiroshima, or Tokyo during the Japan Trip?
-Keywords: itinerary, tourist spots, places to visit, sightseeing, travel plan, Kyoto, Hiroshima, Tokyo, Japan Trip itinerary
-Answer: We'll share the full itinerary at the Info Session. You'll also have opportunities to explore on your own during optional tours and free time in Kyoto and Tokyo.
-Q: Should I book my flight now for the Japan Trip?
-Keywords: book flight, flight booking, waitlist, application confirmation, flight timing, Japan Trip flights
-Answer: Your spot is only confirmed once applications open at the Info Session and you've paid the deposit. We recommend booking your flight after that. If you're comfortable with the risk of ending up on the waitlist, you're welcome to book earlier.
 Q: When do finals end, and when does the spring quarter start?
 Keywords: finals, final exams, spring quarter, academic calendar, FTMBA schedule, UCLA Anderson finals, Japan Trip timing
 Answer: Core final exams run through March 18, and spring quarter instruction begins on March 29.
